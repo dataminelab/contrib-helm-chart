@@ -2,8 +2,8 @@ apiVersion: v1
 entries:
   datareporter:
   - apiVersion: v1
-    appVersion: 0.0.1-9849e1d7
-    created: "2022-06-02T18:41:20.948336404+02:00"
+    appVersion: 0.0.2-9849e1d7
+    created: "2023-05-22T19:59:51.185414568+02:00"
     dependencies:
     - condition: redis.enabled
       name: redis
@@ -15,7 +15,37 @@ entries:
       version: ^8.10.14
     description: Datareporter is an open source tool built for teams to query, visualize
       and collaborate.
-    digest: b59d34963c0a71c1d507df518c2286289014c10323ff010b696a8d743ecbba6f
+    digest: 52d7e8483588c51623a3ff9de7a315fd0843a9a4de0dd78cec697b846e3178e4
+    home: https://datareporter.com/
+    icon: https://redash.io/assets/images/elements/redash-logo.svg
+    keywords:
+    - datareporter
+    - analytics
+    - visualization
+    maintainers:
+    - email: radek@dataminelab.com
+      name: Radek Maciaszek
+    name: datareporter
+    sources:
+    - https://github.com/dataminelab/datareporter
+    urls:
+    - datareporter-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v1
+    appVersion: 0.0.1-9849e1d7
+    created: "2023-05-22T19:59:51.173194392+02:00"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ^10.8.2
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ^8.10.14
+    description: Datareporter is an open source tool built for teams to query, visualize
+      and collaborate.
+    digest: 5559bcbab521a1d70ac9f6748ae84ed1cc0c3c8f3be4372a1aa60bac498a5bb1
     home: https://datareporter.com/
     icon: https://redash.io/assets/images/elements/redash-logo.svg
     keywords:
@@ -31,4 +61,4 @@ entries:
     urls:
     - datareporter-0.0.1.tgz
     version: 0.0.1
-generated: "2022-06-02T18:41:20.922946317+02:00"
+generated: "2023-05-22T19:59:51.166031482+02:00"
