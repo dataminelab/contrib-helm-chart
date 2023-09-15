@@ -2,8 +2,38 @@ apiVersion: v1
 entries:
   datareporter:
   - apiVersion: v1
+    appVersion: a24edf10835275c27fc0a1f1b1581037e45996e9
+    created: "2023-09-15T14:09:03.446543621+02:00"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ^10.8.2
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ^8.10.14
+    description: Datareporter is an open source tool built for teams to query, visualize
+      and collaborate.
+    digest: 69ab6701b293216f962ed8841bd2751dd933ff42c83f3d85ae1dfc5f61ba4688
+    home: https://datareporter.com/
+    icon: https://redash.io/assets/images/elements/redash-logo.svg
+    keywords:
+    - datareporter
+    - analytics
+    - visualization
+    maintainers:
+    - email: radek@dataminelab.com
+      name: Radek Maciaszek
+    name: datareporter
+    sources:
+    - https://github.com/dataminelab/datareporter
+    urls:
+    - datareporter-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v1
     appVersion: 0.0.2-9849e1d7
-    created: "2023-05-22T19:59:51.185414568+02:00"
+    created: "2023-09-15T14:09:03.438587836+02:00"
     dependencies:
     - condition: redis.enabled
       name: redis
@@ -33,7 +63,7 @@ entries:
     version: 0.0.2
   - apiVersion: v1
     appVersion: 0.0.1-9849e1d7
-    created: "2023-05-22T19:59:51.173194392+02:00"
+    created: "2023-09-15T14:09:03.431083523+02:00"
     dependencies:
     - condition: redis.enabled
       name: redis
@@ -61,4 +91,59 @@ entries:
     urls:
     - datareporter-0.0.1.tgz
     version: 0.0.1
-generated: "2023-05-22T19:59:51.166031482+02:00"
+  postgresql:
+  - apiVersion: v1
+    appVersion: 11.8.0
+    created: "2023-09-15T14:09:03.448525231+02:00"
+    description: Chart for PostgreSQL, an object-relational database management system
+      (ORDBMS) with an emphasis on extensibility and on standards-compliance.
+    digest: 5629bfe9ddd829fe1fc20aa469891911b767ef2110f20727e1294d49e7ef8529
+    home: https://www.postgresql.org/
+    icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-110x117.png
+    keywords:
+    - postgresql
+    - postgres
+    - database
+    - sql
+    - replication
+    - cluster
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    - email: cedric@desaintmartin.fr
+      name: desaintmartin
+    name: postgresql
+    sources:
+    - https://github.com/bitnami/bitnami-docker-postgresql
+    urls:
+    - charts/postgresql-8.10.14.tgz
+    version: 8.10.14
+  redis:
+  - annotations:
+      category: Database
+    apiVersion: v1
+    appVersion: 6.0.8
+    created: "2023-09-15T14:09:03.450900335+02:00"
+    description: Open source, advanced key-value store. It is often referred to as
+      a data structure server since keys can contain strings, hashes, lists, sets
+      and sorted sets.
+    digest: a2a6d7b06bc8aba16bac89d9a31c6cc7b5d2bbb9660a3b31dc2e6328580289a5
+    home: https://github.com/bitnami/charts/tree/master/bitnami/redis
+    icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    - email: cedric@desaintmartin.fr
+      name: desaintmartin
+    name: redis
+    sources:
+    - https://github.com/bitnami/bitnami-docker-redis
+    - http://redis.io/
+    urls:
+    - charts/redis-10.9.0.tgz
+    version: 10.9.0
+generated: "2023-09-15T14:09:03.423166428+02:00"
