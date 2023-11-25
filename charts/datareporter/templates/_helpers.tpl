@@ -145,153 +145,153 @@ Shared environment block used across each component.
 - name: "{{ $key }}"
   value: "{{ $value }}"
 {{- end }}
-## Start primary datareporter configuration
-{{- if or .Values.redash.secretKey .Values.redash.existingSecret }}
+## Start primary Redash configuration
+{{- if or .Values.datareporter.secretKey .Values.datareporter.existingSecret }}
 - name: REDASH_SECRET_KEY
   valueFrom:
     secretKeyRef:
-      name: {{ include "redash.secretName" . }}
+      name: {{ include "datareporter.secretName" . }}
       key: secretKey
 {{- end }}
-{{- if .Values.redash.samlSchemeOverride }}
+{{- if .Values.datareporter.samlSchemeOverride }}
 - name: REDASH_SAML_SCHEME_OVERRIDE
-  value: {{ default  .Values.redash.samlSchemeOverride | quote }}
+  value: {{ default  .Values.datareporter.samlSchemeOverride | quote }}
 {{- end }}
-{{- if .Values.redash.proxiesCount }}
+{{- if .Values.datareporter.proxiesCount }}
 - name: REDASH_PROXIES_COUNT
-  value: {{ default  .Values.redash.proxiesCount | quote }}
+  value: {{ default  .Values.datareporter.proxiesCount | quote }}
 {{- end }}
-{{- if .Values.redash.statsdHost }}
+{{- if .Values.datareporter.statsdHost }}
 - name: REDASH_STATSD_HOST
-  value: {{ default  .Values.redash.statsdHost | quote }}
+  value: {{ default  .Values.datareporter.statsdHost | quote }}
 {{- end }}
-{{- if .Values.redash.statsdPort }}
+{{- if .Values.datareporter.statsdPort }}
 - name: REDASH_STATSD_PORT
-  value: {{ default  .Values.redash.statsdPort | quote }}
+  value: {{ default  .Values.datareporter.statsdPort | quote }}
 {{- end }}
-{{- if .Values.redash.statsdPrefix }}
+{{- if .Values.datareporter.statsdPrefix }}
 - name: REDASH_STATSD_PREFIX
-  value: {{ default  .Values.redash.statsdPrefix | quote }}
+  value: {{ default  .Values.datareporter.statsdPrefix | quote }}
 {{- end }}
-{{- if .Values.redash.statsdUseTags }}
+{{- if .Values.datareporter.statsdUseTags }}
 - name: REDASH_STATSD_USE_TAGS
-  value: {{ default  .Values.redash.statsdUseTags | quote }}
+  value: {{ default  .Values.datareporter.statsdUseTags | quote }}
 {{- end }}
-{{- if .Values.redash.celeryBroker }}
+{{- if .Values.datareporter.celeryBroker }}
 - name: REDASH_CELERY_BROKER
-  value: {{ default  .Values.redash.celeryBroker | quote }}
+  value: {{ default  .Values.datareporter.celeryBroker | quote }}
 {{- end }}
-{{- if .Values.redash.celeryBackend }}
+{{- if .Values.datareporter.celeryBackend }}
 - name: REDASH_CELERY_BACKEND
-  value: {{ default  .Values.redash.celeryBackend | quote }}
+  value: {{ default  .Values.datareporter.celeryBackend | quote }}
 {{- end }}
-{{- if .Values.redash.celeryTaskResultExpires }}
+{{- if .Values.datareporter.celeryTaskResultExpires }}
 - name: REDASH_CELERY_TASK_RESULT_EXPIRES
-  value: {{ default  .Values.redash.celeryTaskResultExpires | quote }}
+  value: {{ default  .Values.datareporter.celeryTaskResultExpires | quote }}
 {{- end }}
-{{- if .Values.redash.queryResultsCleanupEnabled }}
+{{- if .Values.datareporter.queryResultsCleanupEnabled }}
 - name: REDASH_QUERY_RESULTS_CLEANUP_ENABLED
-  value: {{ default  .Values.redash.queryResultsCleanupEnabled | quote }}
+  value: {{ default  .Values.datareporter.queryResultsCleanupEnabled | quote }}
 {{- end }}
-{{- if .Values.redash.queryResultsCleanupCount }}
+{{- if .Values.datareporter.queryResultsCleanupCount }}
 - name: REDASH_QUERY_RESULTS_CLEANUP_COUNT
-  value: {{ default  .Values.redash.queryResultsCleanupCount | quote }}
+  value: {{ default  .Values.datareporter.queryResultsCleanupCount | quote }}
 {{- end }}
-{{- if .Values.redash.queryResultsCleanupMaxAge }}
+{{- if .Values.datareporter.queryResultsCleanupMaxAge }}
 - name: REDASH_QUERY_RESULTS_CLEANUP_MAX_AGE
-  value: {{ default  .Values.redash.queryResultsCleanupMaxAge | quote }}
+  value: {{ default  .Values.datareporter.queryResultsCleanupMaxAge | quote }}
 {{- end }}
-{{- if .Values.redash.schemasRefreshQueue }}
+{{- if .Values.datareporter.schemasRefreshQueue }}
 - name: REDASH_SCHEMAS_REFRESH_QUEUE
-  value: {{ default  .Values.redash.schemasRefreshQueue | quote }}
+  value: {{ default  .Values.datareporter.schemasRefreshQueue | quote }}
 {{- end }}
-{{- if .Values.redash.schemasRefreshSchedule }}
+{{- if .Values.datareporter.schemasRefreshSchedule }}
 - name: REDASH_SCHEMAS_REFRESH_SCHEDULE
-  value: {{ default  .Values.redash.schemasRefreshSchedule | quote }}
+  value: {{ default  .Values.datareporter.schemasRefreshSchedule | quote }}
 {{- end }}
-{{- if .Values.redash.authType }}
+{{- if .Values.datareporter.authType }}
 - name: REDASH_AUTH_TYPE
-  value: {{ default  .Values.redash.authType | quote }}
+  value: {{ default  .Values.datareporter.authType | quote }}
 {{- end }}
-{{- if .Values.redash.enforceHttps }}
+{{- if .Values.datareporter.enforceHttps }}
 - name: REDASH_ENFORCE_HTTPS
-  value: {{ default  .Values.redash.enforceHttps | quote }}
+  value: {{ default  .Values.datareporter.enforceHttps | quote }}
 {{- end }}
-{{- if .Values.redash.invitationTokenMaxAge }}
+{{- if .Values.datareporter.invitationTokenMaxAge }}
 - name: REDASH_INVITATION_TOKEN_MAX_AGE
-  value: {{ default  .Values.redash.invitationTokenMaxAge | quote }}
+  value: {{ default  .Values.datareporter.invitationTokenMaxAge | quote }}
 {{- end }}
-{{- if .Values.redash.multiOrg }}
+{{- if .Values.datareporter.multiOrg }}
 - name: REDASH_MULTI_ORG
-  value: {{ default  .Values.redash.multiOrg | quote }}
+  value: {{ default  .Values.datareporter.multiOrg | quote }}
 {{- end }}
-{{- if .Values.redash.googleClientId }}
+{{- if .Values.datareporter.googleClientId }}
 - name: REDASH_GOOGLE_CLIENT_ID
-  value: {{ default  .Values.redash.googleClientId | quote }}
+  value: {{ default  .Values.datareporter.googleClientId | quote }}
 {{- end }}
-{{- if or .Values.redash.googleClientSecret .Values.redash.existingSecret }}
+{{- if or .Values.datareporter.googleClientSecret .Values.datareporter.existingSecret }}
 - name: REDASH_GOOGLE_CLIENT_SECRET
   valueFrom:
     secretKeyRef:
-      name: {{ include "redash.secretName" . }}
+      name: {{ include "datareporter.secretName" . }}
       key: googleClientSecret
 {{- end }}
-{{- if .Values.redash.remoteUserLoginEnabled }}
+{{- if .Values.datareporter.remoteUserLoginEnabled }}
 - name: REDASH_REMOTE_USER_LOGIN_ENABLED
-  value: {{ default  .Values.redash.remoteUserLoginEnabled | quote }}
+  value: {{ default  .Values.datareporter.remoteUserLoginEnabled | quote }}
 {{- end }}
-{{- if .Values.redash.remoteUserHeader }}
+{{- if .Values.datareporter.remoteUserHeader }}
 - name: REDASH_REMOTE_USER_HEADER
-  value: {{ default  .Values.redash.remoteUserHeader | quote }}
+  value: {{ default  .Values.datareporter.remoteUserHeader | quote }}
 {{- end }}
-{{- if .Values.redash.ldapLoginEnabled }}
+{{- if .Values.datareporter.ldapLoginEnabled }}
 - name: REDASH_LDAP_LOGIN_ENABLED
-  value: {{ default  .Values.redash.ldapLoginEnabled | quote }}
+  value: {{ default  .Values.datareporter.ldapLoginEnabled | quote }}
 {{- end }}
-{{- if .Values.redash.ldapUrl }}
+{{- if .Values.datareporter.ldapUrl }}
 - name: REDASH_LDAP_URL
-  value: {{ default  .Values.redash.ldapUrl | quote }}
+  value: {{ default  .Values.datareporter.ldapUrl | quote }}
 {{- end }}
-{{- if .Values.redash.ldapBindDn }}
+{{- if .Values.datareporter.ldapBindDn }}
 - name: REDASH_LDAP_BIND_DN
-  value: {{ default  .Values.redash.ldapBindDn | quote }}
+  value: {{ default  .Values.datareporter.ldapBindDn | quote }}
 {{- end }}
-{{- if or .Values.redash.ldapBindDnPassword .Values.redash.existingSecret }}
+{{- if or .Values.datareporter.ldapBindDnPassword .Values.datareporter.existingSecret }}
 - name: REDASH_LDAP_BIND_DN_PASSWORD
   valueFrom:
     secretKeyRef:
-      name: {{ include "redash.secretName" . }}
+      name: {{ include "datareporter.secretName" . }}
       key: ldapBindDnPassword
 {{- end }}
-{{- if .Values.redash.ldapDisplayNameKey }}
+{{- if .Values.datareporter.ldapDisplayNameKey }}
 - name: REDASH_LDAP_DISPLAY_NAME_KEY
-  value: {{ default  .Values.redash.ldapDisplayNameKey | quote }}
+  value: {{ default  .Values.datareporter.ldapDisplayNameKey | quote }}
 {{- end }}
-{{- if .Values.redash.ldapEmailKey }}
+{{- if .Values.datareporter.ldapEmailKey }}
 - name: REDASH_LDAP_EMAIL_KEY
-  value: {{ default  .Values.redash.ldapEmailKey | quote }}
+  value: {{ default  .Values.datareporter.ldapEmailKey | quote }}
 {{- end }}
-{{- if .Values.redash.ldapCustomUsernamePrompt }}
+{{- if .Values.datareporter.ldapCustomUsernamePrompt }}
 - name: REDASH_LDAP_CUSTOM_USERNAME_PROMPT
-  value: {{ default  .Values.redash.ldapCustomUsernamePrompt | quote }}
+  value: {{ default  .Values.datareporter.ldapCustomUsernamePrompt | quote }}
 {{- end }}
-{{- if .Values.redash.ldapSearchTemplate }}
+{{- if .Values.datareporter.ldapSearchTemplate }}
 - name: REDASH_LDAP_SEARCH_TEMPLATE
-  value: {{ default  .Values.redash.ldapSearchTemplate | quote }}
+  value: {{ default  .Values.datareporter.ldapSearchTemplate | quote }}
 {{- end }}
-{{- if .Values.redash.ldapSearchDn }}
+{{- if .Values.datareporter.ldapSearchDn }}
 - name: REDASH_LDAP_SEARCH_DN
-  value: {{ default  .Values.redash.ldapSearchDn | quote }}
+  value: {{ default  .Values.datareporter.ldapSearchDn | quote }}
 {{- end }}
-{{- if .Values.redash.staticAssetsPath }}
+{{- if .Values.datareporter.staticAssetsPath }}
 - name: REDASH_STATIC_ASSETS_PATH
-  value: {{ default  .Values.redash.staticAssetsPath | quote }}
+  value: {{ default  .Values.datareporter.staticAssetsPath | quote }}
 {{- end }}
-{{- if .Values.redash.jobExpiryTime }}
+{{- if .Values.datareporter.jobExpiryTime }}
 - name: REDASH_JOB_EXPIRY_TIME
-  value: {{ default  .Values.redash.jobExpiryTime | quote }}
+  value: {{ default  .Values.datareporter.jobExpiryTime | quote }}
 {{- end }}
-{{- if or .Values.redash.cookieSecret .Values.redash.existingSecret }}
+{{- if or .Values.datareporter.cookieSecret .Values.datareporter.existingSecret }}
 - name: REDASH_COOKIE_SECRET
   valueFrom:
     secretKeyRef:

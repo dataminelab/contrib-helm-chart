@@ -1,4 +1,4 @@
-## Default values for Redash.
+## Default values for datareporter.
 ## This is a YAML-formatted file.
 
 datareporter:
@@ -332,7 +332,7 @@ redash:
   # -- `SQLALCHEMY_ENABLE_POOL_PRE_PING` value, controls whether the database connection that's in the pool will be checked by pinging before being used or not. See https://docs.sqlalchemy.org/en/13/core/pooling.html#sqlalchemy.pool.Pool.params.pre_ping
   # @default -- true
   sqlAlchemyEnablePoolPrePing: "true"
-  # redash.existingSecret -- Name of existing secret to use instead of either the values above
+  # datareporter.existingSecret -- Name of existing secret to use instead of either the values above
   ## This secret must contain keys matching the items marked "Stored as a Secret value" above.
   # existingSecret:
 
