@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "redash.fullname" . }}
+  name: {{ include "datareporter.fullname" . }}
   labels:
-    {{- include "redash.labels" . | nindent 4 }}
+    {{- include "datareporter.labels" . | nindent 4 }}
 data:
   install-upgrade.sh: |
     #!/usr/bin/env bash
