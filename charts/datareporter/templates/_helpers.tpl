@@ -295,227 +295,227 @@ Shared environment block used across each component.
 - name: REDASH_COOKIE_SECRET
   valueFrom:
     secretKeyRef:
-      name: {{ include "redash.secretName" . }}
+      name: {{ include "datareporter.secretName" . }}
       key: cookieSecret
 {{- end }}
-{{- if .Values.redash.logLevel }}
+{{- if .Values.datareporter.logLevel }}
 - name: REDASH_LOG_LEVEL
-  value: {{ default  .Values.redash.logLevel | quote }}
+  value: {{ default  .Values.datareporter.logLevel | quote }}
 {{- end }}
-{{- if .Values.redash.mailServer }}
+{{- if .Values.datareporter.mailServer }}
 - name: REDASH_MAIL_SERVER
-  value: {{ default  .Values.redash.mailServer | quote }}
+  value: {{ default  .Values.datareporter.mailServer | quote }}
 {{- end }}
-{{- if .Values.redash.mailPort }}
+{{- if .Values.datareporter.mailPort }}
 - name: REDASH_MAIL_PORT
-  value: {{ default  .Values.redash.mailPort | quote }}
+  value: {{ default  .Values.datareporter.mailPort | quote }}
 {{- end }}
-{{- if .Values.redash.mailUseTls }}
+{{- if .Values.datareporter.mailUseTls }}
 - name: REDASH_MAIL_USE_TLS
-  value: {{ default  .Values.redash.mailUseTls | quote }}
+  value: {{ default  .Values.datareporter.mailUseTls | quote }}
 {{- end }}
-{{- if .Values.redash.mailUseSsl }}
+{{- if .Values.datareporter.mailUseSsl }}
 - name: REDASH_MAIL_USE_SSL
-  value: {{ default  .Values.redash.mailUseSsl | quote }}
+  value: {{ default  .Values.datareporter.mailUseSsl | quote }}
 {{- end }}
-{{- if .Values.redash.mailUsername }}
+{{- if .Values.datareporter.mailUsername }}
 - name: REDASH_MAIL_USERNAME
-  value: {{ default  .Values.redash.mailUsername | quote }}
+  value: {{ default  .Values.datareporter.mailUsername | quote }}
 {{- end }}
-{{- if or .Values.redash.mailPassword .Values.redash.existingSecret }}
+{{- if or .Values.datareporter.mailPassword .Values.datareporter.existingSecret }}
 - name: REDASH_MAIL_PASSWORD
   valueFrom:
     secretKeyRef:
-      name: {{ include "redash.secretName" . }}
+      name: {{ include "datareporter.secretName" . }}
       key: mailPassword
 {{- end }}
-{{- if .Values.redash.mailDefaultSender }}
+{{- if .Values.datareporter.mailDefaultSender }}
 - name: REDASH_MAIL_DEFAULT_SENDER
-  value: {{ default  .Values.redash.mailDefaultSender | quote }}
+  value: {{ default  .Values.datareporter.mailDefaultSender | quote }}
 {{- end }}
-{{- if .Values.redash.mailMaxEmails }}
+{{- if .Values.datareporter.mailMaxEmails }}
 - name: REDASH_MAIL_MAX_EMAILS
-  value: {{ default  .Values.redash.mailMaxEmails | quote }}
+  value: {{ default  .Values.datareporter.mailMaxEmails | quote }}
 {{- end }}
-{{- if .Values.redash.mailAsciiAttachments }}
+{{- if .Values.datareporter.mailAsciiAttachments }}
 - name: REDASH_MAIL_ASCII_ATTACHMENTS
-  value: {{ default  .Values.redash.mailAsciiAttachments | quote }}
+  value: {{ default  .Values.datareporter.mailAsciiAttachments | quote }}
 {{- end }}
-{{- if .Values.redash.host }}
+{{- if .Values.datareporter.host }}
 - name: REDASH_HOST
-  value: {{ default  .Values.redash.host | quote }}
+  value: {{ default  .Values.datareporter.host | quote }}
 {{- end }}
-{{- if .Values.redash.alertsDefaultMailSubjectTemplate }}
+{{- if .Values.datareporter.alertsDefaultMailSubjectTemplate }}
 - name: REDASH_ALERTS_DEFAULT_MAIL_SUBJECT_TEMPLATE
-  value: {{ default  .Values.redash.alertsDefaultMailSubjectTemplate | quote }}
+  value: {{ default  .Values.datareporter.alertsDefaultMailSubjectTemplate | quote }}
 {{- end }}
-{{- if .Values.redash.throttleLoginPattern }}
+{{- if .Values.datareporter.throttleLoginPattern }}
 - name: REDASH_THROTTLE_LOGIN_PATTERN
-  value: {{ default  .Values.redash.throttleLoginPattern | quote }}
+  value: {{ default  .Values.datareporter.throttleLoginPattern | quote }}
 {{- end }}
-{{- if .Values.redash.limiterStorage }}
+{{- if .Values.datareporter.limiterStorage }}
 - name: REDASH_LIMITER_STORAGE
-  value: {{ default  .Values.redash.limiterStorage | quote }}
+  value: {{ default  .Values.datareporter.limiterStorage | quote }}
 {{- end }}
-{{- if .Values.redash.corsAccessControlAllowOrigin }}
+{{- if .Values.datareporter.corsAccessControlAllowOrigin }}
 - name: REDASH_CORS_ACCESS_CONTROL_ALLOW_ORIGIN
-  value: {{ default  .Values.redash.corsAccessControlAllowOrigin | quote }}
+  value: {{ default  .Values.datareporter.corsAccessControlAllowOrigin | quote }}
 {{- end }}
-{{- if .Values.redash.corsAccessControlAllowCredentials }}
+{{- if .Values.datareporter.corsAccessControlAllowCredentials }}
 - name: REDASH_CORS_ACCESS_CONTROL_ALLOW_CREDENTIALS
-  value: {{ default  .Values.redash.corsAccessControlAllowCredentials | quote }}
+  value: {{ default  .Values.datareporter.corsAccessControlAllowCredentials | quote }}
 {{- end }}
-{{- if .Values.redash.corsAccessControlRequestMethod }}
+{{- if .Values.datareporter.corsAccessControlRequestMethod }}
 - name: REDASH_CORS_ACCESS_CONTROL_REQUEST_METHOD
-  value: {{ default  .Values.redash.corsAccessControlRequestMethod | quote }}
+  value: {{ default  .Values.datareporter.corsAccessControlRequestMethod | quote }}
 {{- end }}
-{{- if .Values.redash.corsAccessControlAllowHeaders }}
+{{- if .Values.datareporter.corsAccessControlAllowHeaders }}
 - name: REDASH_CORS_ACCESS_CONTROL_ALLOW_HEADERS
-  value: {{ default  .Values.redash.corsAccessControlAllowHeaders | quote }}
+  value: {{ default  .Values.datareporter.corsAccessControlAllowHeaders | quote }}
 {{- end }}
-{{- if .Values.redash.enabledQueryRunners }}
+{{- if .Values.datareporter.enabledQueryRunners }}
 - name: REDASH_ENABLED_QUERY_RUNNERS
-  value: {{ default  .Values.redash.enabledQueryRunners | quote }}
+  value: {{ default  .Values.datareporter.enabledQueryRunners | quote }}
 {{- end }}
-{{- if .Values.redash.additionalQueryRunners }}
+{{- if .Values.datareporter.additionalQueryRunners }}
 - name: REDASH_ADDITIONAL_QUERY_RUNNERS
-  value: {{ default  .Values.redash.additionalQueryRunners | quote }}
+  value: {{ default  .Values.datareporter.additionalQueryRunners | quote }}
 {{- end }}
-{{- if .Values.redash.disabledQueryRunners }}
+{{- if .Values.datareporter.disabledQueryRunners }}
 - name: REDASH_DISABLED_QUERY_RUNNERS
-  value: {{ default  .Values.redash.disabledQueryRunners | quote }}
+  value: {{ default  .Values.datareporter.disabledQueryRunners | quote }}
 {{- end }}
-{{- if .Values.redash.scheduledQueryTimeLimit }}
+{{- if .Values.datareporter.scheduledQueryTimeLimit }}
 - name: REDASH_SCHEDULED_QUERY_TIME_LIMIT
-  value: {{ default  .Values.redash.scheduledQueryTimeLimit | quote }}
+  value: {{ default  .Values.datareporter.scheduledQueryTimeLimit | quote }}
 {{- end }}
-{{- if .Values.redash.adhocQueryTimeLimit }}
+{{- if .Values.datareporter.adhocQueryTimeLimit }}
 - name: REDASH_ADHOC_QUERY_TIME_LIMIT
-  value: {{ default  .Values.redash.adhocQueryTimeLimit | quote }}
+  value: {{ default  .Values.datareporter.adhocQueryTimeLimit | quote }}
 {{- end }}
-{{- if .Values.redash.enabledDestinations }}
+{{- if .Values.datareporter.enabledDestinations }}
 - name: REDASH_ENABLED_DESTINATIONS
-  value: {{ default  .Values.redash.enabledDestinations | quote }}
+  value: {{ default  .Values.datareporter.enabledDestinations | quote }}
 {{- end }}
-{{- if .Values.redash.additionalDestinations }}
+{{- if .Values.datareporter.additionalDestinations }}
 - name: REDASH_ADDITIONAL_DESTINATIONS
-  value: {{ default  .Values.redash.additionalDestinations | quote }}
+  value: {{ default  .Values.datareporter.additionalDestinations | quote }}
 {{- end }}
-{{- if .Values.redash.eventReportingWebhooks }}
+{{- if .Values.datareporter.eventReportingWebhooks }}
 - name: REDASH_EVENT_REPORTING_WEBHOOKS
-  value: {{ default  .Values.redash.eventReportingWebhooks | quote }}
+  value: {{ default  .Values.datareporter.eventReportingWebhooks | quote }}
 {{- end }}
-{{- if .Values.redash.sentryDsn }}
+{{- if .Values.datareporter.sentryDsn }}
 - name: REDASH_SENTRY_DSN
-  value: {{ default  .Values.redash.sentryDsn | quote }}
+  value: {{ default  .Values.datareporter.sentryDsn | quote }}
 {{- end }}
-{{- if .Values.redash.allowScriptsInUserInput }}
+{{- if .Values.datareporter.allowScriptsInUserInput }}
 - name: REDASH_ALLOW_SCRIPTS_IN_USER_INPUT
-  value: {{ default  .Values.redash.allowScriptsInUserInput | quote }}
+  value: {{ default  .Values.datareporter.allowScriptsInUserInput | quote }}
 {{- end }}
-{{- if .Values.redash.dashboardRefreshIntervals }}
+{{- if .Values.datareporter.dashboardRefreshIntervals }}
 - name: REDASH_DASHBOARD_REFRESH_INTERVALS
-  value: {{ default  .Values.redash.dashboardRefreshIntervals | quote }}
+  value: {{ default  .Values.datareporter.dashboardRefreshIntervals | quote }}
 {{- end }}
-{{- if .Values.redash.queryRefreshIntervals }}
+{{- if .Values.datareporter.queryRefreshIntervals }}
 - name: REDASH_QUERY_REFRESH_INTERVALS
-  value: {{ default  .Values.redash.queryRefreshIntervals | quote }}
+  value: {{ default  .Values.datareporter.queryRefreshIntervals | quote }}
 {{- end }}
-{{- if .Values.redash.passwordLoginEnabled }}
+{{- if .Values.datareporter.passwordLoginEnabled }}
 - name: REDASH_PASSWORD_LOGIN_ENABLED
-  value: {{ default  .Values.redash.passwordLoginEnabled | quote }}
+  value: {{ default  .Values.datareporter.passwordLoginEnabled | quote }}
 {{- end }}
-{{- if .Values.redash.samlMetadataUrl }}
+{{- if .Values.datareporter.samlMetadataUrl }}
 - name: REDASH_SAML_METADATA_URL
-  value: {{ default  .Values.redash.samlMetadataUrl | quote }}
+  value: {{ default  .Values.datareporter.samlMetadataUrl | quote }}
 {{- end }}
-{{- if .Values.redash.samlEntityId }}
+{{- if .Values.datareporter.samlEntityId }}
 - name: REDASH_SAML_ENTITY_ID
-  value: {{ default  .Values.redash.samlEntityId | quote }}
+  value: {{ default  .Values.datareporter.samlEntityId | quote }}
 {{- end }}
-{{- if .Values.redash.samlNameidFormat }}
+{{- if .Values.datareporter.samlNameidFormat }}
 - name: REDASH_SAML_NAMEID_FORMAT
-  value: {{ default  .Values.redash.samlNameidFormat | quote }}
+  value: {{ default  .Values.datareporter.samlNameidFormat | quote }}
 {{- end }}
-{{- if .Values.redash.dateFormat }}
+{{- if .Values.datareporter.dateFormat }}
 - name: REDASH_DATE_FORMAT
-  value: {{ default  .Values.redash.dateFormat | quote }}
+  value: {{ default  .Values.datareporter.dateFormat | quote }}
 {{- end }}
-{{- if .Values.redash.jwtLoginEnabled }}
+{{- if .Values.datareporter.jwtLoginEnabled }}
 - name: REDASH_JWT_LOGIN_ENABLED
-  value: {{ default  .Values.redash.jwtLoginEnabled | quote }}
+  value: {{ default  .Values.datareporter.jwtLoginEnabled | quote }}
 {{- end }}
-{{- if .Values.redash.jwtAuthIssuer }}
+{{- if .Values.datareporter.jwtAuthIssuer }}
 - name: REDASH_JWT_AUTH_ISSUER
-  value: {{ default  .Values.redash.jwtAuthIssuer | quote }}
+  value: {{ default  .Values.datareporter.jwtAuthIssuer | quote }}
 {{- end }}
-{{- if .Values.redash.jwtAuthPublicCertsUrl }}
+{{- if .Values.datareporter.jwtAuthPublicCertsUrl }}
 - name: REDASH_JWT_AUTH_PUBLIC_CERTS_URL
-  value: {{ default  .Values.redash.jwtAuthPublicCertsUrl | quote }}
+  value: {{ default  .Values.datareporter.jwtAuthPublicCertsUrl | quote }}
 {{- end }}
-{{- if .Values.redash.jwtAuthAudience }}
+{{- if .Values.datareporter.jwtAuthAudience }}
 - name: REDASH_JWT_AUTH_AUDIENCE
-  value: {{ default  .Values.redash.jwtAuthAudience | quote }}
+  value: {{ default  .Values.datareporter.jwtAuthAudience | quote }}
 {{- end }}
-{{- if .Values.redash.jwtAuthAlgorithms }}
+{{- if .Values.datareporter.jwtAuthAlgorithms }}
 - name: REDASH_JWT_AUTH_ALGORITHMS
-  value: {{ default  .Values.redash.jwtAuthAlgorithms | quote }}
+  value: {{ default  .Values.datareporter.jwtAuthAlgorithms | quote }}
 {{- end }}
-{{- if .Values.redash.jwtAuthCookieName }}
+{{- if .Values.datareporter.jwtAuthCookieName }}
 - name: REDASH_JWT_AUTH_COOKIE_NAME
-  value: {{ default  .Values.redash.jwtAuthCookieName | quote }}
+  value: {{ default  .Values.datareporter.jwtAuthCookieName | quote }}
 {{- end }}
-{{- if .Values.redash.jwtAuthHeaderName }}
+{{- if .Values.datareporter.jwtAuthHeaderName }}
 - name: REDASH_JWT_AUTH_HEADER_NAME
-  value: {{ default  .Values.redash.jwtAuthHeaderName | quote }}
+  value: {{ default  .Values.datareporter.jwtAuthHeaderName | quote }}
 {{- end }}
-{{- if .Values.redash.featureShowQueryResultsCount }}
+{{- if .Values.datareporter.featureShowQueryResultsCount }}
 - name: REDASH_FEATURE_SHOW_QUERY_RESULTS_COUNT
-  value: {{ default  .Values.redash.featureShowQueryResultsCount | quote }}
+  value: {{ default  .Values.datareporter.featureShowQueryResultsCount | quote }}
 {{- end }}
-{{- if .Values.redash.versionCheck }}
+{{- if .Values.datareporter.versionCheck }}
 - name: REDASH_VERSION_CHECK
-  value: {{ default  .Values.redash.versionCheck | quote }}
+  value: {{ default  .Values.datareporter.versionCheck | quote }}
 {{- end }}
-{{- if .Values.redash.featureDisableRefreshQueries }}
+{{- if .Values.datareporter.featureDisableRefreshQueries }}
 - name: REDASH_FEATURE_DISABLE_REFRESH_QUERIES
-  value: {{ default  .Values.redash.featureDisableRefreshQueries | quote }}
+  value: {{ default  .Values.datareporter.featureDisableRefreshQueries | quote }}
 {{- end }}
-{{- if .Values.redash.featureShowPermissionsControl }}
+{{- if .Values.datareporter.featureShowPermissionsControl }}
 - name: REDASH_FEATURE_SHOW_PERMISSIONS_CONTROL
-  value: {{ default  .Values.redash.featureShowPermissionsControl | quote }}
+  value: {{ default  .Values.datareporter.featureShowPermissionsControl | quote }}
 {{- end }}
-{{- if .Values.redash.featureAllowCustomJsVisualizations }}
+{{- if .Values.datareporter.featureAllowCustomJsVisualizations }}
 - name: REDASH_FEATURE_ALLOW_CUSTOM_JS_VISUALIZATIONS
-  value: {{ default  .Values.redash.featureAllowCustomJsVisualizations | quote }}
+  value: {{ default  .Values.datareporter.featureAllowCustomJsVisualizations | quote }}
 {{- end }}
-{{- if .Values.redash.featureDumbRecents }}
+{{- if .Values.datareporter.featureDumbRecents }}
 - name: REDASH_FEATURE_DUMB_RECENTS
-  value: {{ default  .Values.redash.featureDumbRecents | quote }}
+  value: {{ default  .Values.datareporter.featureDumbRecents | quote }}
 {{- end }}
-{{- if .Values.redash.featureAutoPublishNamedQueries }}
+{{- if .Values.datareporter.featureAutoPublishNamedQueries }}
 - name: REDASH_FEATURE_AUTO_PUBLISH_NAMED_QUERIES
-  value: {{ default  .Values.redash.featureAutoPublishNamedQueries | quote }}
+  value: {{ default  .Values.datareporter.featureAutoPublishNamedQueries | quote }}
 {{- end }}
-{{- if .Values.redash.featureExtendedAlertOptions }}
+{{- if .Values.datareporter.featureExtendedAlertOptions }}
 - name: REDASH_FEATURE_EXTENDED_ALERT_OPTIONS
-  value: {{ default  .Values.redash.featureExtendedAlertOptions | quote }}
+  value: {{ default  .Values.datareporter.featureExtendedAlertOptions | quote }}
 {{- end }}
-{{- if .Values.redash.bigqueryHttpTimeout }}
+{{- if .Values.datareporter.bigqueryHttpTimeout }}
 - name: REDASH_BIGQUERY_HTTP_TIMEOUT
-  value: {{ default  .Values.redash.bigqueryHttpTimeout | quote }}
+  value: {{ default  .Values.datareporter.bigqueryHttpTimeout | quote }}
 {{- end }}
-{{- if .Values.redash.schemaRunTableSizeCalculations }}
+{{- if .Values.datareporter.schemaRunTableSizeCalculations }}
 - name: REDASH_SCHEMA_RUN_TABLE_SIZE_CALCULATIONS
-  value: {{ default  .Values.redash.schemaRunTableSizeCalculations | quote }}
+  value: {{ default  .Values.datareporter.schemaRunTableSizeCalculations | quote }}
 {{- end }}
-{{- if .Values.redash.webWorkers }}
+{{- if .Values.datareporter.webWorkers }}
 - name: REDASH_WEB_WORKERS
-  value: {{ default  .Values.redash.webWorkers | quote }}
+  value: {{ default  .Values.datareporter.webWorkers | quote }}
 {{- end }}
-{{- if .Values.redash.sqlAlchemyEnablePoolPrePing }}
+{{- if .Values.datareporter.sqlAlchemyEnablePoolPrePing }}
 - name: SQLALCHEMY_ENABLE_POOL_PRE_PING
-  value: {{ default .Values.redash.sqlAlchemyEnablePoolPrePing | quote }}
+  value: {{ default .Values.datareporter.sqlAlchemyEnablePoolPrePing | quote }}
 {{- end }}
 ## End primary Redash configuration
 {{- end -}}
@@ -523,7 +523,7 @@ Shared environment block used across each component.
 {{/*
 Environment variables initialized from secret used across each component.
 */}}
-{{- define "redash.envFrom" -}}
+{{- define "datareporter.envFrom" -}}
 {{- if .Values.envSecretName -}}
 - secretRef:
     name: {{ .Values.envSecretName }}
@@ -533,9 +533,9 @@ Environment variables initialized from secret used across each component.
 {{/*
 Common labels
 */}}
-{{- define "redash.labels" -}}
-helm.sh/chart: {{ include "redash.chart" . }}
-{{ include "redash.selectorLabels" . }}
+{{- define "datareporter.labels" -}}
+helm.sh/chart: {{ include "datareporter.chart" . }}
+{{ include "datareporter.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -545,17 +545,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "redash.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "redash.name" . }}
+{{- define "datareporter.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "datareporter.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "redash.serviceAccountName" -}}
+{{- define "datareporter.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-    {{ default (include "redash.fullname" .) .Values.serviceAccount.name }}
+    {{ default (include "datareporter.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
@@ -564,8 +564,8 @@ Create the name of the service account to use
 # This ensures a random value is provided for postgresqlPassword:
 required "A secure random value for .postgresql.postgresqlPassword is required" .Values.postgresql.postgresqlPassword
 
-{{- define "redash.plywood.fullname" -}}
-{{- printf "%s-%s" (include "redash.fullname" .) "plywood" | trunc 63 | trimSuffix "-" -}}
+{{- define "datareporter.plywood.fullname" -}}
+{{- printf "%s-%s" (include "datareporter.fullname" .) "plywood" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 
