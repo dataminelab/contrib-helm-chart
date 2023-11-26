@@ -52,7 +52,7 @@ spec:
           env:
             - name: PORT
               value: "{{ .Values.plywood.server.port }}"
-            {{- range $key, $value := .Values.scheduler.env }}
+            {{- range $key, $value := .Values.plywood.env }}
             - name: "{{ $key }}"
               value: "{{ $value }}"
             {{- end }}
