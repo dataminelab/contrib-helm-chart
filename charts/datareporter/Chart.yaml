@@ -1,7 +1,7 @@
 apiVersion: v1
 name: datareporter
-version: 0.0.7
-appVersion: b854a95c06a1a048f1a7f5fd7b667880f88c33ad
+version: 0.0.8
+appVersion: main
 description: Datareporter is an open source tool built for teams to query, visualize and collaborate.
 keywords:
   - datareporter
@@ -14,4 +14,4 @@ icon: https://datareporter.com/favicon-32x32.png
 maintainers:
   - name: Radek Maciaszek
     email: radek@dataminelab.com
-engine: gotpl
+
