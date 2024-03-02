@@ -2,6 +2,36 @@ apiVersion: v1
 entries:
   datareporter:
   - apiVersion: v1
+    appVersion: main
+    created: "2024-03-02T21:13:06.029707902Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ^16.13.2
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ^12.12.10
+    description: Datareporter is an open source tool built for teams to query, visualize
+      and collaborate.
+    digest: f9677c5c19b403c2b304108a7975886a0dccd0a60a84461e909bfcd4f265185d
+    home: https://datareporter.com/
+    icon: https://datareporter.com/favicon-32x32.png
+    keywords:
+    - datareporter
+    - analytics
+    - visualization
+    maintainers:
+    - email: radek@dataminelab.com
+      name: Radek Maciaszek
+    name: datareporter
+    sources:
+    - https://github.com/dataminelab/datareporter
+    urls:
+    - https://github.com/dataminelab/contrib-helm-chart/releases/download/datareporter-0.0.8/datareporter-0.0.8.tgz
+    version: 0.0.8
+  - apiVersion: v1
     appVersion: b854a95c06a1a048f1a7f5fd7b667880f88c33ad
     created: "2023-11-26T09:19:08.09248744Z"
     dependencies:
@@ -266,4 +296,4 @@ entries:
     urls:
     - charts/redis-10.9.0.tgz
     version: 10.9.0
-generated: "2023-11-26T09:19:08.092507307Z"
+generated: "2024-03-02T21:13:06.029729492Z"
