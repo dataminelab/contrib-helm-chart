@@ -132,6 +132,8 @@ Shared environment block used across each component.
     secretKeyRef:
       {{- .Values.externalRedisSecret | toYaml | nindent 6 }}
   {{- else if .Values.externalRedisConfig}}
+- name: REDASH_REDIS_SCHEMA
+  {{- .Values.externalRedisConfig.schema  | toYaml | nindent 2}}
 - name: REDASH_REDIS_PASSWORD
   {{- .Values.externalRedisConfig.password  | toYaml | nindent 2}}
 - name: REDASH_REDIS_HOSTNAME
@@ -146,6 +148,8 @@ Shared environment block used across each component.
   value: {{ default "" .Values.externalRedis | quote }}
   {{- end }}
 {{- else }}
+- name: REDASH_REDIS_SCHEMA
+  value: "redis"
 - name: REDASH_REDIS_PASSWORD
   valueFrom:
     secretKeyRef:
