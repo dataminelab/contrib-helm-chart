@@ -106,6 +106,10 @@ Shared environment block used across each component.
   {{- .Values.externalPostgreSQLConfig.port  | toYaml | nindent 2}}
 - name: REDASH_DATABASE_DB
   {{- .Values.externalPostgreSQLConfig.db  | toYaml | nindent 2}}
+{{- with .Values.externalPostgreSQLConfig.params}}
+- name: REDASH_DATABASE_PARAMS
+  {{- .  | toYaml | nindent 2}}
+{{- end }}
   {{ else }}
 - name: REDASH_DATABASE_URL
   value: {{ default "" .Values.externalPostgreSQL | quote }}

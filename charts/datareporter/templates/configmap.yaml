@@ -80,8 +80,8 @@ data:
     #   This script should be sourced, not run directly.
     #   All variables are expected to be set by the caller.
     if [ -z "$REDASH_DATABASE_URL" ]; then
-      export REDASH_DATABASE_URL=postgresql://${REDASH_DATABASE_USER}:${REDASH_DATABASE_PASSWORD}@${REDASH_DATABASE_HOSTNAME}:${REDASH_DATABASE_PORT}/${REDASH_DATABASE_DB}
-      echo "Using Database: postgresql://${REDASH_DATABASE_USER}:******@${REDASH_DATABASE_HOSTNAME}:${REDASH_DATABASE_PORT}/${REDASH_DATABASE_DB}"
+      export REDASH_DATABASE_URL=postgresql://${REDASH_DATABASE_USER}:${REDASH_DATABASE_PASSWORD}@${REDASH_DATABASE_HOSTNAME}:${REDASH_DATABASE_PORT}/${REDASH_DATABASE_DB}${REDASH_DATABASE_PARAMS}
+      echo "Using Database: postgresql://${REDASH_DATABASE_USER}:******@${REDASH_DATABASE_HOSTNAME}:${REDASH_DATABASE_PORT}/${REDASH_DATABASE_DB}${REDASH_DATABASE_PARAMS}"
     else
       echo "Using external postgresql database"
     fi
