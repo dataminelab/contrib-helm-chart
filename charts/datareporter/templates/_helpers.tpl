@@ -97,15 +97,15 @@ Shared environment block used across each component.
       {{- .Values.externalPostgreSQLSecret | toYaml | nindent 6 }}
   {{- else if .Values.externalPostgreSQLConfig }}
 - name: REDASH_DATABASE_USER
-  {{- .Values.externalPostgreSQLConfig.user  | toYaml | nindent 2}}"
+  {{- .Values.externalPostgreSQLConfig.user  | toYaml | nindent 2}}
 - name: REDASH_DATABASE_PASSWORD
-  {{- .Values.externalPostgreSQLConfig.password  | toYaml | nindent 2}}"
+  {{- .Values.externalPostgreSQLConfig.password  | toYaml | nindent 2}}
 - name: REDASH_DATABASE_HOSTNAME
-  {{- .Values.externalPostgreSQLConfig.host  | toYaml | nindent 2}}"
+  {{- .Values.externalPostgreSQLConfig.host  | toYaml | nindent 2}}
 - name: REDASH_DATABASE_PORT
-  {{- .Values.externalPostgreSQLConfig.port  | toYaml | nindent 2}}"
+  {{- .Values.externalPostgreSQLConfig.port  | toYaml | nindent 2}}
 - name: REDASH_DATABASE_DB
-  {{- .Values.externalPostgreSQLConfig.db  | toYaml | nindent 2}}"
+  {{- .Values.externalPostgreSQLConfig.db  | toYaml | nindent 2}}
   {{ else }}
 - name: REDASH_DATABASE_URL
   value: {{ default "" .Values.externalPostgreSQL | quote }}
@@ -133,13 +133,13 @@ Shared environment block used across each component.
       {{- .Values.externalRedisSecret | toYaml | nindent 6 }}
   {{- else if .Values.externalRedisConfig}}
 - name: REDASH_REDIS_PASSWORD
-  {{- .Values.externalRedisConfig.password  | toYaml | nindent 2}}"
+  {{- .Values.externalRedisConfig.password  | toYaml | nindent 2}}
 - name: REDASH_REDIS_HOSTNAME
-  {{- .Values.externalRedisConfig.host  | toYaml | nindent 2}}"
+  {{- .Values.externalRedisConfig.host  | toYaml | nindent 2}}
 - name: REDASH_REDIS_PORT
-  {{- .Values.externalRedisConfig.port  | toYaml | nindent 2}}"
+  {{- .Values.externalRedisConfig.port  | toYaml | nindent 2}}
 - name: REDASH_REDIS_DB
-  {{- .Values.externalRedisConfig.db  | toYaml | nindent 2}}"
+  {{- .Values.externalRedisConfig.db  | toYaml | nindent 2}}
 
   {{- else }}
 - name: REDASH_REDIS_URL
