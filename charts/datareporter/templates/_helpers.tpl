@@ -121,7 +121,7 @@ Shared environment block used across each component.
   valueFrom:
     secretKeyRef:
       name: {{ .Release.Name }}-postgresql
-      key: postgresql-password
+      key: postgres-password
 - name: REDASH_DATABASE_HOSTNAME
   value: {{ include "datareporter.postgresql.fullname" . }}
 - name: REDASH_DATABASE_PORT
