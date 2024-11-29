@@ -665,27 +665,29 @@ postgresql:
   enabled: true
   image:
     # postgresql.image.tag -- Bitnami supported version close to the one specified in Redash [setup docker-compose.yml](https://github.com/getredash/setup/blob/master/data/docker-compose.yml)
-    tag: "9.6.17-debian-10-r3"
-  # postgresql.postgresqlUsername -- PostgreSQL username for redash user (when postgresql chart enabled)
-  postgresqlUsername: datareporter
-  # postgresql.postgresqlPassword -- REQUIRED: PostgreSQL password for redash user (when postgresql chart enabled)
-  postgresqlPassword:
-  # postgresql.postgresqlDatabase -- PostgreSQL database name (when postgresql chart enabled)
-  postgresqlDatabase: datareporter
+    tag: "15.4.0-debian-11-r45"
+  # postgresql.auth.username -- PostgreSQL username for redash user (when postgresql chart enabled)
+  auth:
+    username: datareporter
+  # postgresql.auth.password -- REQUIRED: PostgreSQL password for redash user (when postgresql chart enabled)
+    password:
+  # postgresql.auth.database -- PostgreSQL database name (when postgresql chart enabled)
+    database: datareporter
   service:
     type: ClusterIP
     port: 5432
-  persistence:
-    # postgresql.persistence.enabled -- Use a PVC to persist PostgreSQL data (when postgresql chart enabled)
-    enabled: true
-    # postgresql.persistence.storageClass - Storage Class for PostgreSQL backing PVC. If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner.  (gp2 on AWS, standard on GKE, AWS & OpenStack).
-    storageClass: ""
-    # postgresql.persistence.accessMode -- Use PostgreSQL volume as ReadOnly or ReadWrite
-    accessMode: ReadWriteOnce
-    # postgresql.persistence.size -- PVC Storage Request size for PostgreSQL volume
-    size: 10Gi
-    # postgresql.persistence.existingClaim -- Provide an existing PostgreSQL PersistentVolumeClaim
-    # existingClaim: ""
+  primary:
+    persistence:
+      # postgresql.primary.persistence.enabled -- Use a PVC to persist PostgreSQL data (when postgresql chart enabled)
+      enabled: true
+      # postgresql.primary.persistence.storageClass - Storage Class for PostgreSQL backing PVC. If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner.  (gp2 on AWS, standard on GKE, AWS & OpenStack).
+      storageClass: ""
+      # postgresql.primary.persistence.accessMode -- Use PostgreSQL volume as ReadOnly or ReadWrite
+      accessMode: ReadWriteOnce
+      # postgresql.primary.persistence.size -- PVC Storage Request size for PostgreSQL volume
+      size: 10Gi
+      # postgresql.primary.persistence.existingClaim -- Provide an existing PostgreSQL PersistentVolumeClaim
+      # existingClaim: ""
 
 # externalRedis -- External Redis configuration. To use an external Redis instead of the automatically deployed redis chart: set redis.enabled to false then uncomment and configure the externalRedis connection URL (e.g. redis://user:pass@host:6379/database).
 externalRedis:
@@ -706,6 +708,5 @@ redis:
   master:
     # redis.master.port -- Redis master port to use (when redis chart enabled)
     port: 6379
-  cluster:
-    # redis.databaseNumber -- Enable Redis clustering (when redis chart enabled)
-    enabled: false
+  # redis.architecture -- Redis architecture. Allowed values: standalone or replication
+  architecture: standalone

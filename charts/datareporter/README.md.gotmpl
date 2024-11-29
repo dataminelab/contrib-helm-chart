@@ -35,7 +35,8 @@ datareporter:
   cookieSecret: $(openssl rand -base64 32)
   secretKey: $(openssl rand -base64 32)
 postgresql:
-  postgresqlPassword: $(openssl rand -base64 32)
+  auth:
+    password: $(openssl rand -base64 32)
 redis:
   password: $(openssl rand -base64 32)
 EOM

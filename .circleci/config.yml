@@ -114,7 +114,8 @@ jobs:
               env:
                 REDASH_WEB_WORKERS: 1
             postgresql:
-              postgresqlPassword: $(openssl rand -base64 32)
+              auth:
+               password: $(openssl rand -base64 32)
             adhocWorker:
               env:
                 WORKERS_COUNT: 1
