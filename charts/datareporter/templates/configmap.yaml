@@ -87,7 +87,7 @@ data:
     fi
     if [ -z "$REDASH_REDIS_URL" ]; then
       export REDASH_REDIS_URL=${REDASH_REDIS_SCHEMA-redis}://${REDASH_REDIS_USERNAME-default}:${REDASH_REDIS_PASSWORD}@${REDASH_REDIS_HOSTNAME}:${REDASH_REDIS_PORT}?db=${REDASH_REDIS_DB}
-      echo "Using Redis: ${REDASH_REDIS_SCHEMA-redis}://:******@${REDASH_REDIS_HOSTNAME}:${REDASH_REDIS_PORT}?db=${REDASH_REDIS_DB}"
+      echo "Using Redis: ${REDASH_REDIS_SCHEMA-redis}://${REDASH_DATABASE_USER}:******@${REDASH_REDIS_HOSTNAME}:${REDASH_REDIS_PORT}?db=${REDASH_REDIS_DB}"
     else
       echo "Using external redis database"
     fi
