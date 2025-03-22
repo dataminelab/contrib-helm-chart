@@ -138,6 +138,8 @@ Shared environment block used across each component.
   {{- else if .Values.externalRedisConfig}}
 - name: REDASH_REDIS_SCHEMA
   {{- .Values.externalRedisConfig.schema  | toYaml | nindent 2}}
+- name: REDASH_REDIS_USERNAME
+  {{- .Values.externalRedisConfig.username  | toYaml | nindent 2}}
 - name: REDASH_REDIS_PASSWORD
   {{- .Values.externalRedisConfig.password  | toYaml | nindent 2}}
 - name: REDASH_REDIS_HOSTNAME
