@@ -362,6 +362,14 @@ Shared environment block used across each component.
       name: {{ include "datareporter.secretName" . }}
       key: mailPassword
 {{- end }}
+{{- if or .Values.datareporter.resendApiKey .Values.datareporter.existingSecret }}
+- name: RESEND_API_KEY
+  valueFrom:
+    secretKeyRef:
+      name: {{ include "datareporter.secretName" . }}
+      key: resendApiKey
+      optional: true
+{{- end }}
 {{- if .Values.datareporter.mailDefaultSender }}
 - name: REDASH_MAIL_DEFAULT_SENDER
   value: {{ default  .Values.datareporter.mailDefaultSender | quote }}

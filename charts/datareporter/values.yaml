@@ -203,6 +203,10 @@ datareporter:
   # -- `REDASH_MAIL_PASSWORD` value. Stored as a Secret value.
   # @default -- None
   mailPassword: ""
+  # -- `RESEND_API_KEY` value. Optional alternative to SMTP. Stored as a Secret value.
+  # When set, emails are sent via Resend API instead of SMTP.
+  # @default -- None
+  resendApiKey: ""
   # -- `REDASH_MAIL_DEFAULT_SENDER` value.
   # @default -- None
   mailDefaultSender: ""
