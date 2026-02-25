@@ -1,0 +1,33 @@
+{{- if and .Values.serviceAccount.create .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "datareporter.fullname" . }}
+  labels:
+    {{- include "datareporter.labels" . | nindent 4 }}
+rules:
+  # Minimal permissions - only what datareporter needs
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get"]
+    resourceNames:
+      - {{ include "datareporter.secretName" . }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "datareporter.fullname" . }}
+  labels:
+    {{- include "datareporter.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "datareporter.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "datareporter.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end }}
