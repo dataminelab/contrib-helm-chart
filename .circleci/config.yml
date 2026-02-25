@@ -40,11 +40,20 @@ jobs:
       - run:
           name: Install helm
           command: |
-            GET=get
-            if [[ $HELM_VERSION =~ ^v3\. ]]; then GET=get-helm-3; fi
-            curl -Lo get-helm.sh "https://raw.githubusercontent.com/helm/helm/master/scripts/${GET}" && chmod +x get-helm.sh
-            ./get-helm.sh --version "${HELM_VERSION}"
-            rm get-helm.sh
+            # Download and verify helm with checksum
+            if [[ $HELM_VERSION =~ ^v3\. ]]; then
+              curl -Lo helm.tar.gz "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz"
+              curl -Lo helm.tar.gz.sha256sum "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz.sha256sum"
+              sha256sum -c helm.tar.gz.sha256sum
+              tar -xzf helm.tar.gz
+              sudo mv linux-amd64/helm /usr/local/bin/helm
+              rm -rf linux-amd64 helm.tar.gz helm.tar.gz.sha256sum
+            else
+              GET=get
+              curl -Lo get-helm.sh "https://raw.githubusercontent.com/helm/helm/master/scripts/${GET}" && chmod +x get-helm.sh
+              ./get-helm.sh --version "${HELM_VERSION}"
+              rm get-helm.sh
+            fi
 
       - run:
           name: Lint chart
@@ -56,7 +65,11 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y conntrack
-            curl -Lo minikube https://github.com/kubernetes/minikube/releases/download/${MINIKUBE_VERSION}/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+            curl -Lo minikube "https://github.com/kubernetes/minikube/releases/download/${MINIKUBE_VERSION}/minikube-linux-amd64"
+            curl -Lo minikube.sha256 "https://github.com/kubernetes/minikube/releases/download/${MINIKUBE_VERSION}/minikube-linux-amd64.sha256"
+            echo "$(cat minikube.sha256)  minikube" | sha256sum -c -
+            chmod +x minikube && sudo mv minikube /usr/local/bin/
+            rm -f minikube.sha256
 
       - run:
           name: Start minikube
@@ -68,7 +81,11 @@ jobs:
       - run:
           name: Setup kubectl
           command: |
-            curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+            curl -Lo kubectl "https://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl"
+            curl -Lo kubectl.sha256 "https://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/linux/amd64/kubectl.sha256"
+            echo "$(cat kubectl.sha256)  kubectl" | sha256sum -c -
+            chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+            rm -f kubectl.sha256
             mkdir -p ${HOME}/.kube
             touch ${HOME}/.kube/config
 
@@ -190,7 +207,15 @@ jobs:
       - run:
           name: Test if we have a new version to publish or not - if we do, tag the repo
           command: |
-            sudo wget -q "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64" -O /usr/local/bin/yq
+            wget -q "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64" -O /tmp/yq
+            wget -q "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/checksums_hashes_order" -O /tmp/yq_checksums 2>/dev/null || true
+            wget -q "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/checksums" -O /tmp/yq_checksums 2>/dev/null || true
+            if [ -f /tmp/yq_checksums ] && grep -q yq_linux_amd64 /tmp/yq_checksums; then
+              grep "yq_linux_amd64$" /tmp/yq_checksums | sed "s|yq_linux_amd64|/tmp/yq|" | sha256sum -c -
+            else
+              echo "WARNING: No checksum available for yq ${YQ_VERSION}, verify manually"
+            fi
+            sudo mv /tmp/yq /usr/local/bin/yq
             sudo chmod +x /usr/local/bin/yq
             VERSION=$(yq eval '.version' Chart.yaml)
             echo "Version: $VERSION"
@@ -206,11 +231,20 @@ jobs:
       - run:
           name: Install helm
           command: |
-            GET=get
-            if [[ $HELM_VERSION =~ ^v3\. ]]; then GET=get-helm-3; fi
-            curl -Lo get-helm.sh "https://raw.githubusercontent.com/helm/helm/master/scripts/${GET}" && chmod +x get-helm.sh
-            ./get-helm.sh --version "${HELM_VERSION}"
-            rm get-helm.sh
+            # Download and verify helm with checksum
+            if [[ $HELM_VERSION =~ ^v3\. ]]; then
+              curl -Lo helm.tar.gz "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz"
+              curl -Lo helm.tar.gz.sha256sum "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz.sha256sum"
+              sha256sum -c helm.tar.gz.sha256sum
+              tar -xzf helm.tar.gz
+              sudo mv linux-amd64/helm /usr/local/bin/helm
+              rm -rf linux-amd64 helm.tar.gz helm.tar.gz.sha256sum
+            else
+              GET=get
+              curl -Lo get-helm.sh "https://raw.githubusercontent.com/helm/helm/master/scripts/${GET}" && chmod +x get-helm.sh
+              ./get-helm.sh --version "${HELM_VERSION}"
+              rm get-helm.sh
+            fi
 
       - run:
           name: Checking out Github Pages branch
