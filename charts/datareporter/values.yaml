@@ -26,29 +26,35 @@ plywood:
   #  memory: 500Mi
   env: { }
 
-  # scheduledWorker.podSecurityContext -- Security contexts for scheduled worker pod assignment [ref](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
-  podSecurityContext: { }
-  securityContext: { }
+  # plywood.podSecurityContext -- Security contexts for plywood pod assignment [ref](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 1000
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
 
-  # scheduledWorker.nodeSelector -- Node labels for scheduled worker pod assignment [ref](https://kubernetes.io/docs/user-guide/node-selection/)
+  # plywood.nodeSelector -- Node labels for plywood pod assignment [ref](https://kubernetes.io/docs/user-guide/node-selection/)
   nodeSelector: { }
 
-  # scheduledWorker.tolerations -- Tolerations for scheduled worker pod assignment [ref](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)
+  # plywood.tolerations -- Tolerations for plywood pod assignment [ref](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)
   tolerations: [ ]
 
-  # scheduledWorker.affinity -- Affinity for scheduled worker pod assignment [ref](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)
+  # plywood.affinity -- Affinity for plywood pod assignment [ref](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)
   affinity: { }
 
-  # scheduledWorker.podAnnotations -- Annotations for scheduled worker pod assignment [ref](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
+  # plywood.podAnnotations -- Annotations for plywood pod assignment [ref](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
   podAnnotations: { }
 
-  # scheduledWorker.podLabels -- Labels for scheduled worker pod assignment [ref](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
+  # plywood.podLabels -- Labels for plywood pod assignment [ref](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
   podLabels: { }
 
-  # scheduledWorker.volumes -- Volumes for scheduled pod  worker assignment [ref](https://kubernetes.io/docs/concepts/storage/volumes/)
+  # plywood.volumes -- Volumes for plywood pod assignment [ref](https://kubernetes.io/docs/concepts/storage/volumes/)
   volumes: [ ]
 
-  # scheduledWorker.volumeMounts -- VolumeMounts for scheduled worker pod assignment [ref](https://kubernetes.io/docs/concepts/storage/volumes/)
+  # plywood.volumeMounts -- VolumeMounts for plywood pod assignment [ref](https://kubernetes.io/docs/concepts/storage/volumes/)
   volumeMounts: [ ]
 # imagePullSecrets -- Name(s) of secrets to use if pulling images from a private registry
 imagePullSecrets: []
@@ -68,6 +74,11 @@ serviceAccount:
   annotations: {}
   # serviceAccount.name -- The name of the service account to use. If not set and create is true, a name is generated using the fullname template
   name:
+
+## RBAC configuration
+rbac:
+  # rbac.create -- Whether to create RBAC Role and RoleBinding with minimal permissions
+  create: true
 
 ## Redash application configuration
 datareporter:
@@ -362,8 +373,14 @@ server:
     #  memory: 500Mi
 
   # server.podSecurityContext -- Security contexts for server pod assignment [ref](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
-  podSecurityContext: {}
-  securityContext: {}
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 1000
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
 
   # server.nodeSelector -- Node labels for server pod assignment [ref](https://kubernetes.io/docs/user-guide/node-selection/)
   nodeSelector: {}
@@ -439,8 +456,14 @@ adhocWorker:
     #  memory: 500Mi
 
   # adhocWorker.podSecurityContext -- Security contexts for ad-hoc worker pod assignment [ref](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
-  podSecurityContext: {}
-  securityContext: {}
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 1000
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
 
   # adhocWorker.nodeSelector -- Node labels for ad-hoc worker pod assignment [ref](https://kubernetes.io/docs/user-guide/node-selection/)
   nodeSelector: {}
@@ -484,8 +507,14 @@ scheduledWorker:
     #  memory: 500Mi
 
   # scheduledWorker.podSecurityContext -- Security contexts for scheduled worker pod assignment [ref](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
-  podSecurityContext: {}
-  securityContext: {}
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 1000
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
 
   # scheduledWorker.nodeSelector -- Node labels for scheduled worker pod assignment [ref](https://kubernetes.io/docs/user-guide/node-selection/)
   nodeSelector: {}
@@ -526,8 +555,14 @@ scheduler:
   #  memory: 500Mi
 
   # scheduler.podSecurityContext -- Security contexts for scheduler pod assignment [ref](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
-  podSecurityContext: {}
-  securityContext: {}
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 1000
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
 
   # scheduler.nodeSelector -- Node labels for scheduler pod assignment [ref](https://kubernetes.io/docs/user-guide/node-selection/)
   nodeSelector: {}
@@ -570,8 +605,14 @@ genericWorker:
   #  memory: 500Mi
 
   # genericWorker.podSecurityContext -- Security contexts for generic worker pod assignment [ref](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
-  podSecurityContext: {}
-  securityContext: {}
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 1000
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
 
   # genericWorker.nodeSelector -- Node labels for generic worker pod assignment [ref](https://kubernetes.io/docs/user-guide/node-selection/)
   nodeSelector: {}
@@ -607,11 +648,17 @@ hookInstallJob:
   #   cpu: 100m
   #  memory: 500Mi
 
-  # hookInstallJob.podSecurityContext -- Security contexts for scheduled worker pod assignment [ref](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
-  podSecurityContext: {}
-  securityContext: {}
+  # hookInstallJob.podSecurityContext -- Security contexts for hookInstallJob pod assignment [ref](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 1000
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
 
-  # hookInstallJob.nodeSelector -- Node labels for scheduled worker pod assignment [ref](https://kubernetes.io/docs/user-guide/node-selection/)
+  # hookInstallJob.nodeSelector -- Node labels for hookInstallJob pod assignment [ref](https://kubernetes.io/docs/user-guide/node-selection/)
   nodeSelector: {}
 
   # hookInstallJob.tolerations -- Tolerations for server pod assignment [ref](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)
@@ -636,9 +683,15 @@ hookUpgradeJob:
   #   cpu: 100m
   #  memory: 500Mi
 
-  # hookUpgradeJob.podSecurityContext -- Security contexts for scheduled worker pod assignment [ref](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
-  podSecurityContext: {}
-  securityContext: {}
+  # hookUpgradeJob.podSecurityContext -- Security contexts for hookUpgradeJob pod assignment [ref](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 1000
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
 
   # hookUpgradeJob.nodeSelector -- Node labels for scheduled worker pod assignment [ref](https://kubernetes.io/docs/user-guide/node-selection/)
   nodeSelector: {}
@@ -651,6 +704,17 @@ hookUpgradeJob:
 
   # hookUpgradeJob.podAnnotations -- Annotations for scheduled worker pod assignment [ref](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
   podAnnotations: {}
+
+## Network Policy configuration
+networkPolicy:
+  # networkPolicy.enabled -- Enable NetworkPolicy resources to restrict pod-to-pod communication
+  enabled: false
+  # networkPolicy.ingressControllerSelector -- Labels to match ingress controller pods (allow traffic to server)
+  ingressControllerSelector:
+    app.kubernetes.io/name: ingress-nginx
+  # networkPolicy.workerEgressCIDRs -- Additional CIDRs that workers can reach (for data sources)
+  workerEgressCIDRs: []
+  # - 10.0.0.0/8
 
 # externalPostgreSQL -- External PostgreSQL configuration. To use an external PostgreSQL instead of the automatically deployed postgresql chart: set postgresql.enabled to false then uncomment and configure the externalPostgreSQL connection URL (e.g. postgresql://user:pass@host:5432/database)
 externalPostgreSQL:
