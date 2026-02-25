@@ -17,7 +17,7 @@ spec:
         app.kubernetes.io/component: plywood
         {{- include "datareporter.selectorLabels" . | nindent 8 }}
         {{- if .Values.plywood.podLabels }}
-        {{- tpl (toYaml .Values.plywood.podLabels) $ | nindent 8 }}
+        {{- toYaml .Values.plywood.podLabels | nindent 8 }}
         {{- end }}
       {{- if .Values.plywood.podAnnotations }}
       annotations:

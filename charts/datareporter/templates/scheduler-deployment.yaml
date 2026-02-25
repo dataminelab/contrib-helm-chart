@@ -17,7 +17,7 @@ spec:
         {{- include "datareporter.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: scheduler
         {{- if .Values.scheduler.podLabels }}
-        {{- tpl (toYaml .Values.scheduler.podLabels) $ | nindent 8 }}
+        {{- toYaml .Values.scheduler.podLabels | nindent 8 }}
         {{- end }}
       {{- if .Values.scheduler.podAnnotations }}
       annotations:

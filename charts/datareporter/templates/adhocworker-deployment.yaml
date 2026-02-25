@@ -17,7 +17,7 @@ spec:
         {{- include "datareporter.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: adhocworker
         {{- if .Values.adhocWorker.podLabels }}
-        {{- tpl (toYaml .Values.adhocWorker.podLabels) $ | nindent 8 }}
+        {{- toYaml .Values.adhocWorker.podLabels | nindent 8 }}
         {{- end }}
       {{- if .Values.adhocWorker.podAnnotations }}
       annotations:

@@ -17,7 +17,7 @@ spec:
         {{- include "datareporter.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: server
         {{- if .Values.server.podLabels }}
-        {{- tpl (toYaml .Values.server.podLabels) $ | nindent 8 }}
+        {{- toYaml .Values.server.podLabels | nindent 8 }}
         {{- end }}
       {{- if .Values.server.podAnnotations }}
       annotations:
