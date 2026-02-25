@@ -1,0 +1,133 @@
+{{- if .Values.networkPolicy.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "datareporter.fullname" . }}-default-deny
+  labels:
+    {{- include "datareporter.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "datareporter.selectorLabels" . | nindent 6 }}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress: []
+  egress: []
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "datareporter.fullname" . }}-server
+  labels:
+    {{- include "datareporter.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "datareporter.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: server
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        # Allow traffic from ingress controller
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              {{- toYaml .Values.networkPolicy.ingressControllerSelector | nindent 14 }}
+        # Allow traffic from workers (for internal API calls)
+        - podSelector:
+            matchLabels:
+              {{- include "datareporter.selectorLabels" . | nindent 14 }}
+      ports:
+        - port: {{ .Values.server.httpPort }}
+          protocol: TCP
+  egress:
+    # Allow DNS
+    - to: []
+      ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+    # Allow PostgreSQL
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: postgresql
+      ports:
+        - port: 5432
+          protocol: TCP
+    # Allow Redis
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: redis
+      ports:
+        - port: 6379
+          protocol: TCP
+    # Allow Plywood
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/component: plywood
+      ports:
+        - port: {{ .Values.plywood.service.port }}
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "datareporter.fullname" . }}-workers
+  labels:
+    {{- include "datareporter.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "datareporter.selectorLabels" . | nindent 6 }}
+      # Matches adhocworker, scheduledworker, genericworker
+  policyTypes:
+    - Egress
+  egress:
+    # Allow DNS
+    - to: []
+      ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+    # Allow PostgreSQL
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: postgresql
+      ports:
+        - port: 5432
+          protocol: TCP
+    # Allow Redis
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: redis
+      ports:
+        - port: 6379
+          protocol: TCP
+    # Allow server (for worker notify URL)
+    - to:
+        - podSelector:
+            matchLabels:
+              {{- include "datareporter.selectorLabels" . | nindent 14 }}
+              app.kubernetes.io/component: server
+      ports:
+        - port: {{ .Values.server.httpPort }}
+          protocol: TCP
+    {{- if .Values.networkPolicy.workerEgressCIDRs }}
+    # Allow egress to configured data source CIDRs
+    {{- range .Values.networkPolicy.workerEgressCIDRs }}
+    - to:
+        - ipBlock:
+            cidr: {{ . }}
+    {{- end }}
+    {{- end }}
+{{- end }}
